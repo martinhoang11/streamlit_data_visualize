@@ -12,6 +12,19 @@ def load_data(nrows):
     data = pd.read_excel(data_url, nrows=nrows)
     return data
 
+#sidebar
+add_selectbox = st.sidebar.selectbox(
+    'How would you like to be contacted?',
+    ('Email', 'Home phone', 'Mobile phone')
+)
+
+# Add a slider to the sidebar:
+add_slider = st.sidebar.slider(
+    'Select a range of values',
+    0.0, 100.0, (25.0, 75.0)
+)
+
+
 #load data
 data_load_state = st.text('Loading data...')
 data = load_data(500)
@@ -29,11 +42,7 @@ hist_val = np.histogram(
 )
 st.bar_chart(hist_val)
 
-#draw histogram
-st.subheader('Number of city')
-hist_val = data['City_clean'].plot(kind='bar')
-st.bar_chart(hist_val)
-
-# #draw map data
-# st.subheader('Map data')
-# st.map(data)
+# #draw histogram
+# st.subheader('Number of city')
+# hist_val = data['City_clean'].plot(kind='bar')
+# st.bar_chart(hist_val)
