@@ -69,6 +69,54 @@ st.title('Vietnam Bank post data visualize')
 vn_bank_url = ('C:/Users/huynh14/fina/vietnam_bank_amc.xlsx')
 vn_bank_data = load_data(vn_bank_url)
 
+#website
 st.subheader('No. of post from website: ')
 fig_website = vn_bank_data['Website'].value_counts()
 st.bar_chart(fig_website, width=1600,height=500)
+
+#city_clean
+st.subheader('Most popular cities: ')
+fig_website = vn_bank_data['City_clean'].value_counts()
+st.bar_chart(fig_website, width=1600,height=500)
+
+#district
+st.subheader('Most popular province: ')
+fig_pro = vn_bank_data['Tinh'].value_counts()
+if st.checkbox('Show province table'):
+    st.write(fig_pro)
+st.bar_chart(fig_pro, width=1600,height=500)
+
+#quan_huyen
+st.subheader('Most top 20 popular district: ')
+fig_district = vn_bank_data['Quan_Huyen'].value_counts()[:20]
+if st.checkbox('Show district table'):
+    st.write(fig_district)
+st.bar_chart(fig_district, width=1600,height=500)
+
+#bat dong san
+st.title('Real estate post data visualize')
+bds_url = ('C:/Users/huynh14/fina/bat_dong_san_nha_dat_ban_new_crawl.xlsx')
+bds_data = load_data(bds_url)
+if st.checkbox('Show real-estate table'):
+    st.write(bds_data)
+
+#price
+st.subheader('Top 20 prices')
+bds_price = bds_data['Price'].value_counts()[:20]
+st.bar_chart(bds_price, width=1600,height=500)
+
+#type of post
+st.subheader('No. of vip and normal post')
+post_rank = bds_data['Post_rank'].value_counts()
+st.bar_chart(post_rank, width=1600,height=500)
+
+#Price-Area
+st.subheader('Price with area frequency')
+price_area = bds_data.groupby(["Price", "Area"]).size().reset_index(name="Time").sort_values('Time')[-20:]
+st.write(price_area)
+st.bar_chart(price_area)
+
+
+
+
+
