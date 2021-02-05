@@ -134,7 +134,7 @@ add_selectbox = st.sidebar.selectbox(
 #range
 show_range = st.sidebar.slider(
     'Select a real estate range of values',
-    0.0, 100.0, (25.0, 75.0)
+    0.0, 200.0, (25.0, 75.0)
 )
 
 #price
