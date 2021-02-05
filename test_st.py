@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 import altair as alt
 from matplotlib.pyplot import figure
 
+#css
+st.markdown('<style>h1{color: red;}</style>', unsafe_allow_html=True)
+
 #function
 @st.cache(allow_output_mutation=True)
 def load_data(url):
@@ -13,17 +16,6 @@ def load_data(url):
 
 #sidebar settings
 st.sidebar.subheader('Configure Settings')
-add_selectbox = st.sidebar.selectbox(
-    'How would you like to be contacted?',
-    ('Email', 'Home phone', 'Mobile phone')
-)
-
-# Add a slider to the sidebar:
-show_range = st.sidebar.slider(
-    'Select a range of values',
-    0.0, 100.0, (25.0, 75.0)
-)
-
 
 #Moigioi
 st.title('Moi gioi data visualize')
@@ -35,10 +27,25 @@ data_url = ('C:/Users/huynh14/fina/moigioi_clean.xlsx')
 data = load_data(data_url)
 data = data.iloc[:, 3:]
 
+#write info
+st.write(f'Number of samples: {len(data)}')
+
 #show data
 if st.checkbox('Show raw data'):
     st.subheader('MG data')
     st.dataframe(data)
+
+#side bar data
+st.sidebar.subheader('Moi gioi config')
+add_selectbox = st.sidebar.selectbox(
+    'Which columns you want to show',
+    (data.columns)
+)
+# Add a slider to the sidebar:
+show_range = st.sidebar.slider(
+    'Select a range of values',
+    0.0, 100.0, (25.0, 75.0)
+)
 
 #website visualize
 st.subheader('No. of post from website: ')
@@ -68,6 +75,21 @@ st.bar_chart(fig_website, width=1600,height=500)
 st.title('Vietnam Bank post data visualize')
 vn_bank_url = ('C:/Users/huynh14/fina/vietnam_bank_amc.xlsx')
 vn_bank_data = load_data(vn_bank_url)
+
+#write info
+st.write(f'Number of samples: {len(vn_bank_data)}')
+
+#side bar vn_bank
+st.sidebar.subheader('Vietnam bank config')
+add_selectbox = st.sidebar.selectbox(
+    'Which columns you want to show',
+    (vn_bank_data.columns)
+)
+#range
+show_range = st.sidebar.slider(
+    'Select a VN range of values',
+    0.0, 100.0, (25.0, 75.0)
+)
 
 #website
 st.subheader('No. of post from website: ')
@@ -99,6 +121,21 @@ bds_url = ('C:/Users/huynh14/fina/bat_dong_san_nha_dat_ban_new_crawl.xlsx')
 bds_data = load_data(bds_url)
 if st.checkbox('Show real-estate table'):
     st.write(bds_data)
+
+#write info
+st.write(f'Number of samples: {len(bds_data)}')
+
+#side bar vn_bank
+st.sidebar.subheader('Real estate config')
+add_selectbox = st.sidebar.selectbox(
+    'Which columns you want to show',
+    (bds_data.columns)
+)
+#range
+show_range = st.sidebar.slider(
+    'Select a real estate range of values',
+    0.0, 100.0, (25.0, 75.0)
+)
 
 #price
 st.subheader('Top 20 prices')
